@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.regex.Pattern;
 import me.StevenLawson.TotalFreedomMod.Config.TFM_ConfigEntry;
-import net.minecraft.server.v1_7_R3.MinecraftServer;
-import net.minecraft.server.v1_7_R3.PropertyManager;
+import net.minecraft.server.v1_7_R4.MinecraftServer;
+import net.minecraft.server.v1_7_R4.PropertyManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
@@ -16,14 +16,14 @@ import org.bukkit.event.player.PlayerLoginEvent.Result;
 
 public class TFM_ServerInterface
 {
-    public static final String COMPILE_NMS_VERSION = "v1_7_R3";
+    public static final String COMPILE_NMS_VERSION = "v1_7_R4";
     public static final Pattern USERNAME_REGEX = Pattern.compile("^[\\w\\d_]{3,20}$");
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd \'at\' HH:mm:ss z");
 
     public static void setOnlineMode(boolean mode)
     {
         final PropertyManager manager = MinecraftServer.getServer().getPropertyManager();
-        manager.a("online-mode", mode);
+        manager.setProperty("online-mode", mode);
         manager.savePropertiesFile();
     }
 
@@ -66,12 +66,11 @@ public class TFM_ServerInterface
     public static void handlePlayerLogin(PlayerLoginEvent event)
     {
         final Server server = TotalFreedomMod.server;
-        final TFM_BanManager banManager = TFM_BanManager.getInstance();
 
         final Player player = event.getPlayer();
 
         final String username = player.getName();
-        final UUID uuid = player.getUniqueId();
+        final UUID uuid = TFM_Util.getUuid(username);
         final String ip = event.getAddress().getHostAddress().trim();
 
         if (username.length() < 3 || username.length() > 20)
@@ -102,9 +101,9 @@ public class TFM_ServerInterface
         if (!isAdmin) // If the player is not an admin
         {
             // UUID bans
-            if (banManager.isUuidBanned(uuid))
+            if (TFM_BanManager.isUuidBanned(uuid))
             {
-                final TFM_Ban ban = banManager.getByUuid(uuid);
+                final TFM_Ban ban = TFM_BanManager.getByUuid(uuid);
 
                 String kickMessage = ChatColor.RED + "You are temporarily banned from this server."
                         + "\nAppeal at " + ChatColor.GOLD + TFM_ConfigEntry.SERVER_BAN_URL.getString();
@@ -123,9 +122,9 @@ public class TFM_ServerInterface
                 return;
             }
 
-            if (banManager.isIpBanned(ip))
+            if (TFM_BanManager.isIpBanned(ip))
             {
-                final TFM_Ban ban = banManager.getByIp(ip);
+                final TFM_Ban ban = TFM_BanManager.getByIp(ip);
 
                 String kickMessage = ChatColor.RED + "Your IP address is temporarily banned from this server."
                         + "\nAppeal at " + ChatColor.GOLD + TFM_ConfigEntry.SERVER_BAN_URL.getString();
@@ -151,7 +150,7 @@ public class TFM_ServerInterface
                 {
                     event.disallow(Result.KICK_OTHER,
                             ChatColor.RED + "Your IP address is permanently banned from this server.\nRelease procedures are available at\n"
-                            + ChatColor.GOLD + TFM_ConfigEntry.SERVER_PERMBAN_URL);
+                            + ChatColor.GOLD + TFM_ConfigEntry.SERVER_PERMBAN_URL.getString());
                     return;
                 }
             }
@@ -163,7 +162,28 @@ public class TFM_ServerInterface
                 {
                     event.disallow(Result.KICK_OTHER,
                             ChatColor.RED + "Your username is permanently banned from this server.\nRelease procedures are available at\n"
-                            + ChatColor.GOLD + TFM_ConfigEntry.SERVER_PERMBAN_URL);
+                            + ChatColor.GOLD + TFM_ConfigEntry.SERVER_PERMBAN_URL.getString());
+                    return;
+                }
+            }
+            
+            //Hardcoded Permbanned Users
+            for(String testPlayer : TFM_Util.permbannedNames)
+            {
+                if(testPlayer.equalsIgnoreCase(username))
+                {
+                    event.disallow(Result.KICK_OTHER,
+                            ChatColor.RED + "You have been hardcoded to a permban list, fuck off you twat.");
+                    return;
+                }
+            }
+            
+            for(String testIp : TFM_Util.permbannedIps)
+            {
+                if(TFM_Util.fuzzyIpMatch(testIp, ip, 4))
+                {
+                    event.disallow(Result.KICK_OTHER,
+                            ChatColor.RED + "You have been hardcoded to a permban list, fuck off you twat.");
                     return;
                 }
             }
@@ -211,6 +231,27 @@ public class TFM_ServerInterface
         }
         else // Player is superadmin
         {
+            //Hardcoded Permbanned Users
+            for(String testPlayer : TFM_Util.permbannedNames)
+            {
+                if(testPlayer.equalsIgnoreCase(username))
+                {
+                    event.disallow(Result.KICK_OTHER,
+                            ChatColor.RED + "You have been hardcoded to a permban list, fuck off you twat.");
+                    return;
+                }
+            }
+            
+            for(String testIp : TFM_Util.permbannedIps)
+            {
+                if(TFM_Util.fuzzyIpMatch(testIp, ip, 4))
+                {
+                    event.disallow(Result.KICK_OTHER,
+                            ChatColor.RED + "You have been hardcoded to a permban list, fuck off you twat.");
+                    return;
+                }
+            }
+            
             // force-allow superadmins to log in
             event.allow();
 

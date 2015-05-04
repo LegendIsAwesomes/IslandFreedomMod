@@ -1,12 +1,12 @@
 package me.StevenLawson.TotalFreedomMod;
 
-import me.StevenLawson.TotalFreedomMod.Config.TFM_ConfigEntry;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import me.StevenLawson.TotalFreedomMod.Commands.TFM_CommandLoader;
+import me.StevenLawson.TotalFreedomMod.Config.TFM_ConfigEntry;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
@@ -15,24 +15,32 @@ import org.bukkit.entity.Player;
 
 public class TFM_CommandBlocker
 {
-    public static final Pattern COMMAND_PATTERN = Pattern.compile("^/?(\\S+)");
-    private Map<String, CommandBlockerEntry> blockedCommands = new HashMap<String, CommandBlockerEntry>();
+    public static final Pattern COMMAND_PATTERN;
+    private static final Map<String, CommandBlockerEntry> BLOCKED_COMMANDS;
+
+    static
+    {
+        COMMAND_PATTERN = Pattern.compile("^/?(\\S+)");
+        BLOCKED_COMMANDS = new HashMap<String, CommandBlockerEntry>();
+    }
 
     private TFM_CommandBlocker()
     {
+        throw new AssertionError();
     }
 
-    public final void load()
+    public static final void load()
     {
-        blockedCommands.clear();
+        BLOCKED_COMMANDS.clear();
 
-        final CommandMap commandMap = TFM_CommandLoader.getInstance().getCommandMap();
+        final CommandMap commandMap = TFM_CommandLoader.getCommandMap();
         if (commandMap == null)
         {
             TFM_Log.severe("Error loading commandMap.");
             return;
         }
 
+        @SuppressWarnings("unchecked")
         List<String> _blockedCommands = (List<String>) TFM_ConfigEntry.BLOCKED_COMMANDS.getList();
         for (String rawEntry : _blockedCommands)
         {
@@ -89,32 +97,32 @@ public class TFM_CommandBlocker
             if (bukkitCommand == null)
             {
                 //TFM_Log.info("Blocking unknown command: " + blockedCommandEntry.getCommand());
-                blockedCommands.put(blockedCommandEntry.getCommand(), blockedCommandEntry);
+                BLOCKED_COMMANDS.put(blockedCommandEntry.getCommand(), blockedCommandEntry);
             }
             else
             {
                 blockedCommandEntry.setCommand(bukkitCommand.getName().toLowerCase());
 
                 //TFM_Log.info("Blocking command: " + blockedCommandEntry.getCommand());
-                blockedCommands.put(blockedCommandEntry.getCommand(), blockedCommandEntry);
+                BLOCKED_COMMANDS.put(blockedCommandEntry.getCommand(), blockedCommandEntry);
 
                 for (String alias : bukkitCommand.getAliases())
                 {
                     //TFM_Log.info("Blocking alias: " + alias.toLowerCase() + " of " + blockedCommandEntry.getCommand());
-                    blockedCommands.put(alias.toLowerCase(), blockedCommandEntry);
+                    BLOCKED_COMMANDS.put(alias.toLowerCase(), blockedCommandEntry);
                 }
             }
         }
 
-        TFM_Log.info("Loaded " + blockedCommands.size() + " blocked commands.");
+        TFM_Log.info("Loaded " + BLOCKED_COMMANDS.size() + " blocked commands");
     }
 
-    public boolean isCommandBlocked(String command, CommandSender sender)
+    public static boolean isCommandBlocked(String command, CommandSender sender)
     {
         return isCommandBlocked(command, sender, true);
     }
 
-    public boolean isCommandBlocked(String command, CommandSender sender, boolean doAction)
+    public static boolean isCommandBlocked(String command, CommandSender sender, boolean doAction)
     {
         if (command == null || command.isEmpty())
         {
@@ -145,7 +153,7 @@ public class TFM_CommandBlocker
             return true;
         }
 
-        final CommandBlockerEntry entry = blockedCommands.get(command);
+        final CommandBlockerEntry entry = BLOCKED_COMMANDS.get(command);
 
         if (entry != null)
         {
@@ -230,7 +238,7 @@ public class TFM_CommandBlocker
         }
     }
 
-    private enum CommandBlockerAction
+    private static enum CommandBlockerAction
     {
         BLOCK("b"),
         BLOCK_AND_EJECT("a"),
@@ -327,15 +335,5 @@ public class TFM_CommandBlocker
                 sender.sendMessage(response);
             }
         }
-    }
-
-    public static TFM_CommandBlocker getInstance()
-    {
-        return TFM_CommandBlockerHolder.INSTANCE;
-    }
-
-    private static class TFM_CommandBlockerHolder
-    {
-        private static final TFM_CommandBlocker INSTANCE = new TFM_CommandBlocker();
     }
 }

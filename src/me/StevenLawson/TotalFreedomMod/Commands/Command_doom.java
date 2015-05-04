@@ -14,10 +14,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-@CommandPermissions(level = AdminLevel.SENIOR, source = SourceType.ONLY_CONSOLE)
+@CommandPermissions(level = AdminLevel.SENIOR, source = SourceType.BOTH)
 @CommandParameters(description = "For the bad Superadmins", usage = "/<command> <playername>")
 public class Command_doom extends TFM_Command
 {
+
     @Override
     public boolean run(final CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
@@ -53,13 +54,13 @@ public class Command_doom extends TFM_Command
         player.setOp(false);
 
         // ban IPs
-        for (String playerIp : TFM_PlayerList.getInstance().getEntry(player).getIps())
+        for (String playerIp : TFM_PlayerList.getEntry(player).getIps())
         {
-            TFM_BanManager.getInstance().addIpBan(new TFM_Ban(playerIp, player.getName()));
+            TFM_BanManager.addIpBan(new TFM_Ban(playerIp, player.getName()));
         }
 
-        // ban name
-        TFM_BanManager.getInstance().addUuidBan(new TFM_Ban(player.getUniqueId(), player.getName()));
+        // ban uuid
+        TFM_BanManager.addUuidBan(player);
 
         // set gamemode to survival
         player.setGameMode(GameMode.SURVIVAL);

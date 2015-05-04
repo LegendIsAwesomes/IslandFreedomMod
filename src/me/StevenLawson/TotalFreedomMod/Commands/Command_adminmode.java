@@ -7,8 +7,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandPermissions(level = AdminLevel.SUPER, source = SourceType.ONLY_CONSOLE, blockHostConsole = true)
-@CommandParameters(description = "Close server to non-superadmins.", usage = "/<command> [on | off]")
+@CommandPermissions(level = AdminLevel.SUPER, source = SourceType.BOTH, blockHostConsole = true)
+@CommandParameters(description = "Close server to non-superadmins.", usage = "/<command> [on | off]", aliases = "am")
 public class Command_adminmode extends TFM_Command
 {
     @Override

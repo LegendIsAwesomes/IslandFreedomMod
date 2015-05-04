@@ -66,7 +66,6 @@ public class Command_potion extends TFM_Command
                         return true;
                     }
                 }
-
                 if (!target.equals(sender_p))
                 {
                     if (!TFM_AdminList.isSuperAdmin(sender))
@@ -97,6 +96,11 @@ public class Command_potion extends TFM_Command
         {
             if (args[0].equalsIgnoreCase("add"))
             {
+                if (args[2].equalsIgnoreCase("invisibility"))
+                {
+                    TFM_Util.playerMsg(sender, "You are not allowed to use invisibility!", ChatColor.RED);
+                    return true;
+                }
                 Player target = sender_p;
 
                 if (args.length == 5)
@@ -136,6 +140,7 @@ public class Command_potion extends TFM_Command
                 try
                 {
                     duration = Integer.parseInt(args[2]);
+                    duration = Math.min(duration, 100000);
                 }
                 catch (NumberFormatException ex)
                 {
@@ -147,6 +152,7 @@ public class Command_potion extends TFM_Command
                 try
                 {
                     amplifier = Integer.parseInt(args[3]);
+                    amplifier = Math.min(amplifier, 100000);
                 }
                 catch (NumberFormatException ex)
                 {

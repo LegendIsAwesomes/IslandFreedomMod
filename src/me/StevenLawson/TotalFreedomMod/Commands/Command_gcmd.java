@@ -1,8 +1,11 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
+import me.StevenLawson.TotalFreedomMod.TFM_AdminList;
 import me.StevenLawson.TotalFreedomMod.TFM_CommandBlocker;
+import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import net.minecraft.util.org.apache.commons.lang3.StringUtils;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -29,9 +32,18 @@ public class Command_gcmd extends TFM_Command
 
         final String outCommand = StringUtils.join(args, " ", 1, args.length);
 
-        if (TFM_CommandBlocker.getInstance().isCommandBlocked(outCommand, sender))
+        if (TFM_CommandBlocker.isCommandBlocked(outCommand, sender))
         {
             return true;
+        }
+
+        if (TFM_AdminList.isSuperAdmin(player) && !senderIsConsole)
+        {
+            if (!TFM_Util.isHighRank(sender))
+            {
+                TFM_Util.playerMsg(sender, ChatColor.RED + "You cannot gcmd other admins, stop trying to cause trouble!");
+                return true;
+            }
         }
 
         try

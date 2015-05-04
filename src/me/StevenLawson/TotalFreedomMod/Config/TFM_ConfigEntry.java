@@ -4,7 +4,6 @@ import java.util.List;
 
 public enum TFM_ConfigEntry
 {
-	//
     ALLOW_EXPLOSIONS(Boolean.class, "allow.explosions"),
     ALLOW_FIRE_PLACE(Boolean.class, "allow.fire_place"),
     ALLOW_FIRE_SPREAD(Boolean.class, "allow.fire_spread"),
@@ -13,6 +12,7 @@ public enum TFM_ConfigEntry
     ALLOW_LAVA_PLACE(Boolean.class, "allow.lava_place"),
     ALLOW_TNT_MINECARTS(Boolean.class, "allow.tnt_minecarts"),
     ALLOW_WATER_PLACE(Boolean.class, "allow.water_place"),
+    ENABLE_CHAOS(Boolean.class, "enable_chaos"),
     //
     MOB_LIMITER_ENABLED(Boolean.class, "moblimiter.enabled"),
     MOB_LIMITER_MAX(Integer.class, "moblimiter.max"),
@@ -30,6 +30,7 @@ public enum TFM_ConfigEntry
     SERVER_ADDRESS(String.class, "server.address"),
     SERVER_MOTD(String.class, "server.motd"),
     SERVER_OWNERS(List.class, "server.owners"),
+    DEVELOPERS(List.class, "server.developers"),
     SERVER_BAN_URL(String.class, "server.ban_url"),
     SERVER_PERMBAN_URL(String.class, "server.permban_url"),
     //
@@ -42,6 +43,7 @@ public enum TFM_ConfigEntry
     //
     ENABLE_PREPROCESS_LOG(Boolean.class, "preprocess_log"),
     ENABLE_PET_PROTECT(Boolean.class, "petprotect.enabled"),
+    ENABLE_ADMINWORLD(Boolean.class, "adminworld_enabled"),
     //
     LANDMINES_ENABLED(Boolean.class, "landmines_enabled"),
     TOSSMOB_ENABLED(Boolean.class, "tossmob_enabled"),
@@ -66,6 +68,11 @@ public enum TFM_ConfigEntry
     FLATLANDS_GENERATE(Boolean.class, "flatlands.generate"),
     FLATLANDS_GENERATE_PARAMS(String.class, "flatlands.generate_params"),
     //
+    ANNOUNCER_ENABLED(Boolean.class, "announcer.enabled"),
+    ANNOUNCER_INTERVAL(Integer.class, "announcer.interval"),
+    ANNOUNCER_PREFIX(String.class, "announcer.prefix"),
+    ANNOUNCER_ANNOUNCEMENTS(List.class, "announcer.announcements"),
+    //
     EXPLOSIVE_RADIUS(Double.class, "explosive_radius"),
     FREECAM_TRIGGER_COUNT(Integer.class, "freecam_trigger_count"),
     SERVICE_CHECKER_URL(String.class, "service_checker_url"),
@@ -73,6 +80,7 @@ public enum TFM_ConfigEntry
     HOST_SENDER_NAMES(List.class, "host_sender_names"),
     UNBANNABLE_USERNAMES(List.class, "unbannable_usernames"),
     ADMIN_ONLY_MODE(Boolean.class, "admin_only_mode"),
+    TRAINING_SESSION(Boolean.class, "training_mode"),
     AUTO_ENTITY_WIPE(Boolean.class, "auto_wipe"),
     CONSOLE_IS_SENIOR(Boolean.class, "console_is_senior");
     //
@@ -97,51 +105,51 @@ public enum TFM_ConfigEntry
 
     public String getString()
     {
-        return TFM_MainConfig.getInstance().getString(this);
+        return TFM_MainConfig.getString(this);
     }
 
     public String setString(String value)
     {
-        TFM_MainConfig.getInstance().setString(this, value);
+        TFM_MainConfig.setString(this, value);
         return value;
     }
 
     public Double getDouble()
     {
-        return TFM_MainConfig.getInstance().getDouble(this);
+        return TFM_MainConfig.getDouble(this);
     }
 
     public Double setDouble(Double value)
     {
-        TFM_MainConfig.getInstance().setDouble(this, value);
+        TFM_MainConfig.setDouble(this, value);
         return value;
     }
 
     public Boolean getBoolean()
     {
-        return TFM_MainConfig.getInstance().getBoolean(this);
+        return TFM_MainConfig.getBoolean(this);
     }
 
     public Boolean setBoolean(Boolean value)
     {
-        TFM_MainConfig.getInstance().setBoolean(this, value);
+        TFM_MainConfig.setBoolean(this, value);
         return value;
     }
 
     public Integer getInteger()
     {
-        return TFM_MainConfig.getInstance().getInteger(this);
+        return TFM_MainConfig.getInteger(this);
     }
 
     public Integer setInteger(Integer value)
     {
-        TFM_MainConfig.getInstance().setInteger(this, value);
+        TFM_MainConfig.setInteger(this, value);
         return value;
     }
 
     public List<?> getList()
     {
-        return TFM_MainConfig.getInstance().getList(this);
+        return TFM_MainConfig.getList(this);
     }
 
     public static TFM_ConfigEntry findConfigEntry(String name)

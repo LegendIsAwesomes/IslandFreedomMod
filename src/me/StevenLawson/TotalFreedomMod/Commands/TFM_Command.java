@@ -1,9 +1,8 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
-import java.util.List;
+import me.StevenLawson.TotalFreedomMod.TFM_AdminList;
 import me.StevenLawson.TotalFreedomMod.TFM_Log;
 import me.StevenLawson.TotalFreedomMod.TFM_PlayerData;
-import me.StevenLawson.TotalFreedomMod.TFM_AdminList;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import org.bukkit.ChatColor;
@@ -14,6 +13,11 @@ import org.bukkit.entity.Player;
 
 public abstract class TFM_Command
 {
+    public static final String MSG_NO_PERMS = ChatColor.YELLOW + "You do not have permission to use this command.";
+    public static final String YOU_ARE_OP = ChatColor.YELLOW + "You are now op!";
+    public static final String YOU_ARE_NOT_OP = ChatColor.YELLOW + "You are no longer op!";
+    public static final String NOT_FROM_CONSOLE = "This command may not be used from the console.";
+    public static final String PLAYER_NOT_FOUND = ChatColor.GRAY + "Player not found!";
     protected TotalFreedomMod plugin;
     protected Server server;
     private CommandSender commandSender;
@@ -134,23 +138,52 @@ public abstract class TFM_Command
         return true;
     }
 
-    public Player getPlayer(final String partialname)
+    public Player getPlayer(final String partialName)
     {
-        List<Player> matches = server.matchPlayer(partialname);
-        if (matches.isEmpty())
+        return getPlayer(partialName, false);
+    }
+
+    public Player getPlayer(final String partialName, final boolean exact)
+    {
+        if (partialName == null || partialName.isEmpty())
         {
-            for (Player player : server.getOnlinePlayers())
-            {
-                if (player.getDisplayName().toLowerCase().contains(partialname.toLowerCase()))
-                {
-                    return player;
-                }
-            }
             return null;
         }
-        else
+
+        final Player[] players = server.getOnlinePlayers();
+
+        // Check exact matches first.
+        for (final Player player : players)
         {
-            return matches.get(0);
+            if (partialName.equalsIgnoreCase(player.getName()))
+            {
+                return player;
+            }
         }
+
+        if (exact)
+        {
+            return null;
+        }
+
+        // Then check partial matches in name.
+        for (final Player player : players)
+        {
+            if (player.getName().toLowerCase().contains(partialName.toLowerCase()))
+            {
+                return player;
+            }
+        }
+
+        // Then check partial matches in display name.
+        for (final Player player : players)
+        {
+            if (player.getDisplayName().toLowerCase().contains(partialName.toLowerCase()))
+            {
+                return player;
+            }
+        }
+
+        return null;
     }
 }

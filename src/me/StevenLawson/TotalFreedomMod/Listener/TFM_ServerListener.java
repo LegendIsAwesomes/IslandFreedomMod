@@ -48,12 +48,12 @@ public class TFM_ServerListener implements Listener
      }
      }
      }*/
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGH)
     public void onServerPing(ServerListPingEvent event)
     {
         final String ip = event.getAddress().getHostAddress();
 
-        if (TFM_BanManager.getInstance().isIpBanned(ip))
+        if (TFM_BanManager.isIpBanned(ip))
         {
             event.setMotd(ChatColor.RED + "You are banned.");
             return;
@@ -77,6 +77,12 @@ public class TFM_ServerListener implements Listener
             return;
         }
 
+        /*if (TFM_ConfigEntry.ENABLE_CHAOS.getBoolean())
+        {
+            event.setMotd(ChatColor.RED + "Server is currently in chaos mode, prepare for some crazy shit!");
+            return;
+        }*/
+
         if (!TFM_ConfigEntry.SERVER_COLORFUL_MOTD.getBoolean())
         {
             event.setMotd(TFM_Util.colorize(TFM_ConfigEntry.SERVER_MOTD.getString()
@@ -85,9 +91,11 @@ public class TFM_ServerListener implements Listener
         }
         // Colorful MOTD
 
+        String message = String.format("Welcome to FreedomOp%s! - Fun, Free and Easy! Running on CraftBukkit for Minecraft 1.7.10!", TFM_Util.getPlayerFromIp(ip));
+
         final StringBuilder motd = new StringBuilder();
 
-        for (String word : TFM_ConfigEntry.SERVER_MOTD.getString().replace("%mcversion%", TFM_ServerInterface.getVersion()).split(" "))
+        for (String word : message.split(" "))
         {
             motd.append(TFM_Util.randomChatColor()).append(word).append(" ");
         }
