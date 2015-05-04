@@ -273,9 +273,7 @@ public class TFM_MainConfig
             try
             {
                 defaults = new YamlConfiguration();
-                final InputStreamReader isr = new InputStreamReader(defaultConfig);
-                defaults.load(isr);
-                isr.close();
+                defaults.load(defaultConfig);
             }
             catch (IOException ex)
             {

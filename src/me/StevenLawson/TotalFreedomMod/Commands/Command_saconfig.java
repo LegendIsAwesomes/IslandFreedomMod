@@ -3,7 +3,6 @@ package me.StevenLawson.TotalFreedomMod.Commands;
 import me.StevenLawson.TotalFreedomMod.Config.TFM_ConfigEntry;
 import me.StevenLawson.TotalFreedomMod.TFM_Admin;
 import me.StevenLawson.TotalFreedomMod.TFM_AdminList;
-import me.StevenLawson.TotalFreedomMod.TFM_TwitterHandler;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import net.minecraft.util.org.apache.commons.lang3.StringUtils;
@@ -194,12 +193,6 @@ public class Command_saconfig extends TFM_Command
 
             TFM_Util.adminAction(sender.getName(), "Removing " + targetName + " from the superadmin list", true);
             TFM_AdminList.removeSuperadmin(Bukkit.getOfflinePlayer(targetName));
-
-            // Twitterbot
-            if (TFM_ConfigEntry.TWITTERBOT_ENABLED.getBoolean())
-            {
-                TFM_TwitterHandler.delTwitterVerbose(targetName, sender);
-            }
             return true;
         }
         return false;
