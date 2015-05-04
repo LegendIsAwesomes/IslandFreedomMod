@@ -17,14 +17,14 @@ public enum TFM_PlayerRank
     IFM_DEVELOPER("a " + ChatColor.DARK_PURPLE + "Developer", ChatColor.DARK_PURPLE + "[Dev]"),
     SPEC_EXEC("a " + ChatColor.YELLOW + "Special Executive", ChatColor.YELLOW + "[Spec-Exec]"),
     SYS_ADMIN("a " + ChatColor.DARK_RED + "System-Admin", ChatColor.DARK_RED + "[Sys-Admin]"),
-    FOUNDER("the " + ChatColor.BLUE + "Founder", ChatColor.BLUE + "[Founder]"),
     IMPOSTOR("an " + ChatColor.GRAY + ChatColor.UNDERLINE + "Impostor", ChatColor.GRAY.toString() + ChatColor.UNDERLINE + "[IMP]"),
     NON_OP("a " + ChatColor.GREEN + "Non-OP", ChatColor.GREEN.toString()),
     OP("an " + ChatColor.RED + "OP", ChatColor.RED + "[OP]"),
     SUPER("a " + ChatColor.GOLD + "Super Admin", ChatColor.GOLD + "[SA]"),
     TELNET("a " + ChatColor.DARK_GREEN + "Super Telnet Admin", ChatColor.DARK_GREEN + "[STA]"),
     SENIOR("a " + ChatColor.LIGHT_PURPLE + "Senior Admin", ChatColor.LIGHT_PURPLE + "[SrA]"),
-    OWNER("one of the " + ChatColor.BLUE + "Owners", ChatColor.BLUE + "[Owner]"),
+    OWNER("the " + ChatColor.BLUE + "Owner of " + ChatColor.LIGHT_PURPLE + "IslandFreedom", ChatColor.BLUE + "[Owner]"),
+    CO_OWNER("the " + ChatColor.BLUE + "Co-Owner of " + ChatColor.LIGHT_PURPLE + "IslandFreedom", ChatColor.BLUE + "[Co-Owner]"),
     CONSOLE("the " + ChatColor.DARK_PURPLE + "Console", ChatColor.DARK_PURPLE + "[Console]");
     private String loginMessage;
     private String prefix;
@@ -77,6 +77,11 @@ public enum TFM_PlayerRank
         else if (sender.getName().equals("LukaG4mer"))
         {
             return OWNER;
+        }
+        
+        else if (sender.getName().equals("LegendaryCraft"))
+        {
+            return CO_OWNER;
         }
         
         else if (SYS_ADMINS.contains(sender.getName()))

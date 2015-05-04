@@ -934,11 +934,6 @@ public class TFM_PlayerListener implements Listener
 
         String name = player.getName();
         String name2;
-        
-        if(name.equals("SupItsDillon"))
-        {
-            player.kickPlayer("Fuck off");
-        }
 
         if (TFM_AdminList.isSuperAdmin(player))
         {
@@ -949,11 +944,17 @@ public class TFM_PlayerListener implements Listener
             player.setPlayerListName(ChatColor.BLUE + player.getName());
             TFM_PlayerData.getPlayerData(player).setTag("&8[&9Owner&8]");
         }
+        
+        else if (player.getName().equals("LegendaryCraft"))
+        {
+            player.setPlayerListName(ChatColor.BLUE + player.getName());
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&9Co-Owner&8]");
+        }
 
         else if (TFM_Util.SYS_ADMINS.contains(player.getName()))
         {
-            player.setPlayerListName((ChatColor.YELLOW + player.getName()).substring(0, Math.min(player.getName().length(), 16)));
-            TFM_PlayerData.getPlayerData(player).setTag("&8[&dSys-Admin&8]");
+            player.setPlayerListName((ChatColor.DARK_RED + player.getName()).substring(0, Math.min(player.getName().length(), 16)));
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&4Sys-Admin&8]");
         }
         else if (TFM_Util.SPECIAL_EXECS.contains(player.getName()))
         {
