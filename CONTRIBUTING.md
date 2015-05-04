@@ -48,8 +48,7 @@ For those who wish to contribute, we encourage you to fork the repository and su
 * Wait as a developer evaluates your changes.
 
 ## Additional Resources ##
-* [TotalFreedom information](http://totalfreedom.me)
-* [TotalFreedom forums](http://totalfreedom.boards.net)
-* [Bug tracker](https://github.com/TotalFreedom/TotalFreedomMod/issues)
+* [IslandFreedom forums](http://islandfreedom.boards.net)
+* [Bug tracker](https://github.com/IslandFreedom/IslandFreedomMod/issues)
 * [General GitHub documentation](http://help.github.com/)
 * [GitHub pull request documentation](http://help.github.com/send-pull-requests/)
