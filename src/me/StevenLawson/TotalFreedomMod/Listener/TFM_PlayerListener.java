@@ -944,40 +944,10 @@ public class TFM_PlayerListener implements Listener
         {
             TFM_PlayerData.getPlayerData(player).setCommandSpy(true);
         }
-        if (player.getName().equals("Camzie99") || player.getName().equals("lynxlps") || player.getName().equals("DarkLynx108"))
+        if (player.getName().equals("LukaG4mer"))
         {
             player.setPlayerListName(ChatColor.BLUE + player.getName());
             TFM_PlayerData.getPlayerData(player).setTag("&8[&9Owner&8]");
-        }
-        else if (player.getName().equals("CrafterSmith12"))
-        {
-            player.setPlayerListName(ChatColor.BLUE + player.getName());
-            TFM_PlayerData.getPlayerData(player).setTag("&8[&9Founder&8]");
-
-        }
-        else if (player.getName().equalsIgnoreCase("aggelosQQ"))
-        {
-            player.setPlayerListName(ChatColor.YELLOW + "aggelosQQ");
-            TFM_EssentialsBridge.setNickname(player.getName(), ChatColor.DARK_RED + "ag" + ChatColor.RED + "ge" + ChatColor.DARK_BLUE + "lo" + ChatColor.BLUE + "sQ" + ChatColor.GREEN + "Q");
-            event.setJoinMessage(ChatColor.YELLOW + "aggelosQQ joined the game.");
-            TFM_PlayerData.getPlayerData(player).setTag("&8[&eSpecial Executive&8]");
-            player.chat("Hey everyone, I'm a Special Executive and the Associated Server Liason.");
-        }
-        else if (player.getName().equalsIgnoreCase("PieGuy7896"))
-        {
-            player.setPlayerListName(ChatColor.LIGHT_PURPLE + "PieGuy7886");
-            player.setDisplayName("Pie");
-            event.setJoinMessage(ChatColor.YELLOW + "Pie has joined the game.");
-            TFM_PlayerData.getPlayerData(player).setTag("&8[&dSenior Admin &8/ &5Dev&8]");
-
-        }
-        else if (player.getName().equalsIgnoreCase("RobinGall2910"))
-        {
-            player.setPlayerListName(ChatColor.DARK_PURPLE + "Robin");
-            player.setDisplayName("Robin");
-            event.setJoinMessage(ChatColor.YELLOW + "Guess who came.");
-            event.setJoinMessage(ChatColor.YELLOW + "RobinGall2910 joined the game.");
-            event.setJoinMessage(ChatColor.AQUA + "Robin is a" + ChatColor.DARK_GREEN + "Zombie Killer ");
         }
 
         else if (TFM_Util.SYS_ADMINS.contains(player.getName()))
@@ -993,12 +963,12 @@ public class TFM_PlayerListener implements Listener
         else if (TFM_Util.FOP_DEVELOPERS.contains(player.getName()))
         {
             player.setPlayerListName(ChatColor.DARK_PURPLE + player.getName());
-            TFM_PlayerData.getPlayerData(player).setTag("&8[&5Developer&8]");
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&5FOP-Developer&8]");
         }
-        else if (TFM_Util.WEB_DEVELOPERS.contains(player.getName()))
+        else if (TFM_Util.IFM_DEVELOPERS.contains(player.getName()))
         {
-            player.setPlayerListName(ChatColor.GREEN + player.getName());
-            TFM_PlayerData.getPlayerData(player).setTag("&8[&aWeb Dev&8]");
+            player.setPlayerListName(ChatColor.DARK_PURPLE + player.getName());
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&5Developer&8]");
         }
         else if (TFM_Util.DEVELOPERS.contains(player.getName()))
         {

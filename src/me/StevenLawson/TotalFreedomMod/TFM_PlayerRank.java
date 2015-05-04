@@ -3,9 +3,9 @@ package me.StevenLawson.TotalFreedomMod;
 import me.StevenLawson.TotalFreedomMod.Config.TFM_ConfigEntry;
 import static me.StevenLawson.TotalFreedomMod.TFM_Util.DEVELOPERS;
 import static me.StevenLawson.TotalFreedomMod.TFM_Util.FOP_DEVELOPERS;
+import static me.StevenLawson.TotalFreedomMod.TFM_Util.IFM_DEVELOPERS;
 import static me.StevenLawson.TotalFreedomMod.TFM_Util.SPECIAL_EXECS;
 import static me.StevenLawson.TotalFreedomMod.TFM_Util.SYS_ADMINS;
-import static me.StevenLawson.TotalFreedomMod.TFM_Util.WEB_DEVELOPERS;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -13,8 +13,8 @@ import org.bukkit.entity.Player;
 public enum TFM_PlayerRank
 {
     DEVELOPER("a " + ChatColor.DARK_PURPLE + "TotalFreedomMod Developer", ChatColor.DARK_PURPLE + "[TFM Dev]"),
-    FOP_DEVELOPER("a " + ChatColor.DARK_PURPLE + "Developer", ChatColor.DARK_PURPLE + "[Dev]"),
-    WEB_DEVELOPER("a " + ChatColor.GREEN + "Web Developer", ChatColor.GREEN + "[Web Dev]"),
+    FOP_DEVELOPER("a " + ChatColor.DARK_PURPLE + "FreedomOP Developer", ChatColor.DARK_PURPLE + "[FOP-Dev]"),
+    IFM_DEVELOPER("a " + ChatColor.DARK_PURPLE + "Developer", ChatColor.DARK_PURPLE + "[Dev]"),
     SPEC_EXEC("a " + ChatColor.YELLOW + "Special Executive", ChatColor.YELLOW + "[Spec-Exec]"),
     SYS_ADMIN("a " + ChatColor.DARK_RED + "System-Admin", ChatColor.DARK_RED + "[Sys-Admin]"),
     FOUNDER("the " + ChatColor.BLUE + "Founder", ChatColor.BLUE + "[Founder]"),
@@ -94,9 +94,9 @@ public enum TFM_PlayerRank
             return FOP_DEVELOPER;
         }
         
-        else if (WEB_DEVELOPERS.contains(sender.getName()))
+        else if (IFM_DEVELOPERS.contains(sender.getName()))
         {
-            return WEB_DEVELOPER;
+            return IFM_DEVELOPER;
         }
 
         else if (DEVELOPERS.contains(sender.getName()))

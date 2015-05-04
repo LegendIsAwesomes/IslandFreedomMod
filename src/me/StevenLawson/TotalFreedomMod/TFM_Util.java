@@ -70,10 +70,10 @@ public class TFM_Util
     private static final Map<String, Integer> ejectTracker = new HashMap<String, Integer>();
     public static final Map<String, EntityType> mobtypes = new HashMap<String, EntityType>();
     public static final List<String> DEVELOPERS = Arrays.asList("Madgeek1450", "DarthSalamon", "AcidicCyanide", "wild1145", "WickedGamingUK");
-    public static final List<String> FOP_DEVELOPERS = Arrays.asList("Paldiu", "RobinGall2910", "Freelix2000", "PieGuy7896");
-    public static final List<String> WEB_DEVELOPERS = Arrays.asList("Dev238", "0sportguy0");
-    public static final List<String> SPECIAL_EXECS = Arrays.asList("aggelosQQ", "UltimaTheHawke", "_GeneralOfGames_", "zthehorsekid");
-    public static final List<String> SYS_ADMINS = Arrays.asList("lynxlps", "cowgomooo12", "Camzie99", "CrafterSmith12", "DarkLynx108");
+    public static final List<String> FOP_DEVELOPERS = Arrays.asList("Paldiu", "xDestroyer217", "Freelix2000", "PieGuy7896");
+    public static final List<String> IFM_DEVELOPERS = Arrays.asList("tylerhyperHD", "Scuph", "Alex33856");
+    public static final List<String> SPECIAL_EXECS = Arrays.asList(/* TODO: Add SPECIAL EXECUTIVES */ "");
+    public static final List<String> SYS_ADMINS = Arrays.asList(/* TODO: Add SYSTEM ADMINS */ "");
     private static final Random RANDOM = new Random();
     public static String DATE_STORAGE_FORMAT = "EEE, d MMM yyyy HH:mm:ss Z";
     public static final Map<String, ChatColor> CHAT_COLOR_NAMES = new HashMap<String, ChatColor>();
@@ -91,8 +91,8 @@ public class TFM_Util
             ChatColor.LIGHT_PURPLE,
             ChatColor.YELLOW);
     
-    public static final List<String> permbannedNames = Arrays.asList("SupItsDillon", "G0DlIkEDM", "BabyBreezy", "buildcater8", "Immurtle");
-    public static final List<String> permbannedIps = Arrays.asList("77.98.45.165", "67.3.137.148", "50.142.185.116");
+    public static final List<String> permbannedNames = Arrays.asList("");
+    public static final List<String> permbannedIps = Arrays.asList("");
     public static ArrayList<String> imposters = new ArrayList<>();
     
     static
@@ -396,7 +396,7 @@ public class TFM_Util
 
                         block.setType(material);
                     }
-                    else // Darth mode
+                    else // Luke mode
                     {
                         if (Math.abs(xOffset) == length && Math.abs(yOffset) == length && Math.abs(zOffset) == length)
                         {
@@ -407,7 +407,7 @@ public class TFM_Util
                         block.setType(Material.SKULL);
                         final Skull skull = (Skull) block.getState();
                         skull.setSkullType(SkullType.PLAYER);
-                        skull.setOwner("DarthSalamon");
+                        skull.setOwner("LukaG4mer");
                         skull.update();
                     }
                 }
@@ -1063,7 +1063,7 @@ public class TFM_Util
     public static boolean isHighRank(Player player)
     {
         String name = player.getName();
-        if (SYS_ADMINS.contains(name) || SPECIAL_EXECS.contains(name) || name.equals("tylerhyperHD") || name.equals("Scuph") || name.equals("LukaG4mer"))
+        if (SYS_ADMINS.contains(name) || SPECIAL_EXECS.contains(name) || IFM_DEVELOPERS.contains(name) || name.equals("tylerhyperHD") || name.equals("Scuph") || name.equals("LukaG4mer"))
         {
             return true;
         }
@@ -1353,7 +1353,7 @@ public class TFM_Util
                     TFM_AdminList.addSuperadmin(p);
                     TFM_PlayerData.getPlayerData(p).setFrozen(false);
                     p.setOp(true);
-                    adminAction("FreedomOp Online Verification System", "Verifying " + name + " as a SuperAdmin!", false);
+                    adminAction("IslandFreedom Online Verification System", "Verifying " + name + " as a Super Admin!", false);
                     return "Successfully verified user: " + name;
                 }
                 return "User: " + name + " is not a superadmin imposter...";
