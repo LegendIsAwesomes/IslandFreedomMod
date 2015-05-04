@@ -158,6 +158,8 @@ landmines_enabled: false
 mp44_enabled: false
 tossmob_enabled: false
 adminworld_enabled: true
+enable_chaos: false
+training_mode: false
 
 # Moblimiter:
 
@@ -200,7 +202,7 @@ announcer:
   enabled: true
 
   # Interval between announcements, in seconds.
-  interval: 30
+  interval: 100
 
   # Prefix for all announcements
   prefix: '&5[&eIslandFreedom&5] &b'

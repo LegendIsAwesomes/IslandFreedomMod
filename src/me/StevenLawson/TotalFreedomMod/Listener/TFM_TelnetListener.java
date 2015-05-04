@@ -41,8 +41,18 @@ public class TFM_TelnetListener implements Listener
 
         event.setBypassPassword(true);
         event.setName(admin.getLastLoginName());
-        TFM_Util.adminAction(admin.getLastLoginName(), "Logged in via Telnet!", true);
-        server.dispatchCommand((CommandSender) server, "o " + admin.getLastLoginName() + " has logged in via Telnet");
+        
+        for (Player p : Bukkit.getOnlinePlayers())
+        {
+            if (TFM_Util.isHighRank(p))
+            {
+            }
+            else
+            {
+            if (TFM_AdminList.isSuperAdmin(p))
+            p.sendMessage("§e[§bAdminChat§e] §4CONSOLE §5[Console]§f: " + ChatColor.YELLOW + admin.getLastLoginName() + " has logged in via telnet!");
+            }
+        }
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
@@ -54,7 +64,7 @@ public class TFM_TelnetListener implements Listener
         }
         for (Player player : Bukkit.getOnlinePlayers())
         {
-            if (TFM_AdminList.isSeniorAdmin(player))
+            if (TFM_Util.isHighRank(player))
             {
                 TFM_Util.playerMsg(player, ChatColor.GRAY + "" + ChatColor.ITALIC + event.getSender().getName() + ": /" + event.getCommand());
             }

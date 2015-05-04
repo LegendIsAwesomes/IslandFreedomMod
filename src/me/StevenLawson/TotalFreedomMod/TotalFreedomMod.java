@@ -36,6 +36,7 @@ public class TotalFreedomMod extends JavaPlugin
 {
     public static final long HEARTBEAT_RATE = 5L; // Seconds
     public static final long SERVICE_CHECKER_RATE = 120L;
+    public static final int MAX_USERNAME_LENGTH = 20;
     //
     public static final String SUPERADMIN_FILE = "superadmin.yml";
     public static final String PERMBAN_FILE = "permban.yml";
@@ -85,7 +86,7 @@ public class TotalFreedomMod extends JavaPlugin
     public void onEnable()
     {
         TFM_Log.info("TotalFreedom Log Info");
-        TFM_Log.info("Made by Madgeek1450 and DarthSalamon");
+        TFM_Log.info("Made by Madgeek1450 and Prozza");
         TFM_Log.info("Compiled " + buildDate + " by " + buildCreator);
         TFM_Log.info("IslandFreedom was made by Alex33856, tylerhyperHD And Scuph");
 
@@ -229,7 +230,6 @@ public class TotalFreedomMod extends JavaPlugin
             final InputStream in = plugin.getResource("appinfo.properties");
             Properties props = new Properties();
 
-            // in = plugin.getClass().getResourceAsStream("/appinfo.properties");
             props.load(in);
             in.close();
 
