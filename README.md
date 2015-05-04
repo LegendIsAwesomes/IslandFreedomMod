@@ -1,7 +1,5 @@
-FreedomOPMod
-============
+IslandFreedomMod
+==========
+IslandFreedomMod was made by TylerHyperHD, Scuph!
 
-FreedomOpMod for the minecraft server freedom OP
-
-Website:
-www.freedomop.boards.net
+Also IslandFreedomMod is based off FreedomOpMod!!
