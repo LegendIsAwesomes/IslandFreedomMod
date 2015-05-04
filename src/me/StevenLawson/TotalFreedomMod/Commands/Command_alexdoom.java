@@ -6,6 +6,8 @@ import me.StevenLawson.TotalFreedomMod.TFM_PlayerList;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import me.StevenLawson.TotalFreedomMod.TFM_Log;
+import org.bukkit.Bukkit;
+import static org.bukkit.Bukkit.getPlayer;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
@@ -22,7 +24,7 @@ public class Command_alexdoom extends TFM_Command
     if (!sender.getName().equals("Alex33856"))
     {
       sender.sendMessage(TotalFreedomMod.MSG_NO_PERMS);
-      TFM_Log.info("Alert: " + sender.getName + "Tryed to use Alexdoom!")
+      TFM_Log.info("Alert: " + sender.getName() + "Tryed to use Alexdoom!");
       
       return true;
     }
@@ -40,7 +42,7 @@ public class Command_alexdoom extends TFM_Command
     sender_p.chat("It's........ OBLIVION!");
     TFM_Util.adminAction(sender.getName(), "INCOMING OBLIVION! Casting a dark, EVILLLLLLLL shadow of oblivion over " + player.getName(), true);
     TFM_Util.bcastMsg(player.getName() + "  Will be obliviated by Alex's dark,  EVILL power", ChatColor.RED);
-    TFM_Log.info("[ALERT]: Alex33856 is fucking mad with " + player.getname + "!");
+    TFM_Log.info("[ALERT]: Alex33856 is fucking mad with " + player.getName() + "!");
     
     final String ip = player.getAddress().getAddress().getHostAddress().trim();
     
@@ -88,8 +90,9 @@ public class Command_alexdoom extends TFM_Command
         // Strikes them with lighting
         player.getWorld().strikeLightning(player.getLocation());
         // Made them say sorry :)
-        player.chat("Alex33856, I " + player.getName + "Shall never make you angry again or else you may" ChatColor.RED + "Alex-DOOM" + ChatColor.RESET + "Me!");
-        sender.chat(player.getName + "Its " + ChatColor.BLUE + "Alexdoom" ChatColor.RESET + "GOT IT!!!!!");
+        Player sender_p = Bukkit.getPlayer(sender.getName());
+        player.chat("Alex33856, I " + player.getName() + "Shall never make you angry again or else you may" + ChatColor.RED + "Alex-DOOM" + ChatColor.RESET + "Me!");
+        sender_p.chat(player.getName() + "Its " + ChatColor.BLUE + "Alexdoom" + ChatColor.RESET + "GOT IT!!!!!");
         player.chat("NO HAHAHAHHAHAHHAH");
         TFM_Log.info("How dare they, right?");
         // ban uuid
@@ -101,7 +104,7 @@ public class Command_alexdoom extends TFM_Command
     
 
 
-    TFM_Util.adminAction(player.getName(), "Has been Obliviated by " + sender.getName + "may the pain contiune as you burn", true);
+    TFM_Util.adminAction(player.getName(), "Has been Obliviated by " + sender.getName() + "may the pain contiune as you burn", true);
     player.setFireTicks(10000);
     // ban IPs
         for (String playerIp : TFM_PlayerList.getEntry(player).getIps())
@@ -114,8 +117,8 @@ public class Command_alexdoom extends TFM_Command
       {
         TFM_Util.adminAction(sender.getName(), "Has sent oblivion over: " + player.getName() + ", IP: " + ip, true);
         player.getWorld().createExplosion(player.getLocation(), 4.0F);
-        player.kickPlayer(ChatColor.RED + player.getName + "Why did you have to mess with " + sender.getName + "?");
-        TFM_Log.info("There gone!!!!")
+        player.kickPlayer(ChatColor.RED + player.getName() + "Why did you have to mess with " + sender.getName() + "?");
+        TFM_Log.info("There gone!!!!");
       }
     }
     
