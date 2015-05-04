@@ -10,6 +10,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 
 @CommandPermissions(level = AdminLevel.SUPER, source = SourceType.BOTH)
@@ -37,7 +38,8 @@ public class Command_cake extends TFM_Command
 
         for (Player player : server.getOnlinePlayers())
         {
-            player.getInventory().setItem(player.getInventory().firstEmpty(), heldItem);
+            PlayerInventory inv = player.getInventory();
+            inv.addItem(heldItem);
             player.awardAchievement(Achievement.MINE_WOOD);
             player.awardAchievement(Achievement.BUILD_WORKBENCH);
             player.awardAchievement(Achievement.BUILD_HOE);
