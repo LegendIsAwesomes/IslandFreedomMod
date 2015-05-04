@@ -1,3 +1,5 @@
+// TODO: Make personal commands
+
 package me.StevenLawson.TotalFreedomMod.Commands;
 
 import java.util.Arrays;
@@ -51,7 +53,6 @@ public class Command_personal extends TFM_Command
         switch (which)
         {
             case "Camzie99":
-
                 break;
             case "jumpymonkey123":
                 TFM_Util.asciiUnicorn();
