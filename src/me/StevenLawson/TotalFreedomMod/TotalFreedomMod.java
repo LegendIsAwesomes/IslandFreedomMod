@@ -42,6 +42,7 @@ public class TotalFreedomMod extends JavaPlugin
     public static final String PROTECTED_AREA_FILE = "protectedareas.dat";
     public static final String SAVED_FLAGS_FILE = "savedflags.dat";
     //
+    public static final String OWNER = "LukaG4mer";
     public static final String MSG_NO_PERMS = ChatColor.YELLOW + "You do not have permission to use this command.";
     public static final String YOU_ARE_OP = ChatColor.YELLOW + "You are now op!";
     public static final String YOU_ARE_NOT_OP = ChatColor.YELLOW + "You are no longer op!";
@@ -51,9 +52,9 @@ public class TotalFreedomMod extends JavaPlugin
     public static final String PLAYER_NOT_FOUND = ChatColor.GRAY + "Player not found!";
     public static final String ALEX33856 = ChatColor.DARK_GRAY + "OMFGGG ALEX33856 IS HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEE!!!";
     //
-    public static String buildNumber = "1";
+    public static String buildNumber = "4";
     public static String buildDate = TotalFreedomMod.buildDate = TFM_Util.dateToString(new Date());
-    public static String buildCreator = "Unknown";
+    public static String buildCreator = "tylerhyperHD";
     //
     public static Server server;
     public static TotalFreedomMod plugin;
@@ -86,8 +87,7 @@ public class TotalFreedomMod extends JavaPlugin
         TFM_Log.info("TotalFreedom Log Info");
         TFM_Log.info("Made by Madgeek1450 and DarthSalamon");
         TFM_Log.info("Compiled " + buildDate + " by " + buildCreator);
-        TFM_Log.info("IslandFreedomMod Log");
-        TFM_Log.info("IslandFreedom was made by Alex33856, TylerHyperHD And Scuph!!!!");
+        TFM_Log.info("IslandFreedom was made by Alex33856, tylerhyperHD And Scuph");
 
         if (!TFM_ServerInterface.COMPILE_NMS_VERSION.equals(TFM_Util.getNmsVersion()))
         {
@@ -108,6 +108,7 @@ public class TotalFreedomMod extends JavaPlugin
         TFM_PermbanList.load();
         TFM_PlayerList.load();
         TFM_BanManager.load();
+        TFM_Announcer.load();
 
         // Protect area
         // TODO: Refractor to single .load() method
