@@ -16,12 +16,12 @@ import org.bukkit.WorldType;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 
-public class TFM_MinigameWorld extends TFM_CustomWorld
+public class IFM_MinigameWorld extends TFM_CustomWorld
 {
     private static final String GENERATION_PARAMETERS = TFM_ConfigEntry.FLATLANDS_GENERATE_PARAMS.getString();
     private static final String WORLD_NAME = "minigameworld";
 
-    private TFM_MinigameWorld()
+    private IFM_MinigameWorld()
     {
     }
 
@@ -90,13 +90,13 @@ public class TFM_MinigameWorld extends TFM_CustomWorld
         }
     }
 
-    public static TFM_MinigameWorld getInstance()
+    public static IFM_MinigameWorld getInstance()
     {
         return TFM_FlatlandsHolder.INSTANCE;
     }
 
     private static class TFM_FlatlandsHolder
     {
-        private static final TFM_MinigameWorld INSTANCE = new TFM_MinigameWorld();
+        private static final IFM_MinigameWorld INSTANCE = new IFM_MinigameWorld();
     }
 }
