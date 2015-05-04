@@ -92,6 +92,11 @@ public class TFM_PlayerListener implements Listener
             player.setPlayerListName(ChatColor.BLUE + player.getName());
             TFM_PlayerData.getPlayerData(player).setTag("&8[&9Co-Owner&8]");
         }
+        else if (player.getName().equals("Alex33856"))
+        {
+            player.setPlayerListName(ChatColor.GREEN + "Al" ChatColor.DARK_GREEN + "ex");
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&5Developer&8]")
+        }
 
         else if (TFM_Util.SYS_ADMINS.contains(player.getName()))
         {
@@ -121,17 +126,17 @@ public class TFM_PlayerListener implements Listener
         else if (TFM_AdminList.isSeniorAdmin(player))
         {
             player.setPlayerListName(ChatColor.LIGHT_PURPLE + player.getName());
-            TFM_PlayerData.getPlayerData(player).setTag("&8[&dSenior-Admin&8]");
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&dSenior Admin&8]");
         }
         else if (TFM_AdminList.isTelnetAdmin(player, true))
         {
             player.setPlayerListName(ChatColor.DARK_GREEN + player.getName());
-            TFM_PlayerData.getPlayerData(player).setTag("&8[&2Telnet-Admin&8]");
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&2Telnet Admin&8]");
         }
         else if (TFM_AdminList.isSuperAdmin(player))
         {
             player.setPlayerListName(ChatColor.AQUA + player.getName());
-            TFM_PlayerData.getPlayerData(player).setTag("&8[&bSuper-Admin&8]");
+            TFM_PlayerData.getPlayerData(player).setTag("&8[&bSuper dmin&8]");
         }
     }
     
