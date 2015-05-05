@@ -15,7 +15,7 @@ import org.bukkit.entity.Player;
 
 @CommandPermissions(level = AdminLevel.SUPER, source = SourceType.BOTH)
 @CommandParameters(description = "Someone being a little bitch? Smite them down...", usage = "/<command> [playername] [reason]")
-public class Command_smite extends TFM_Command
+public class Command_punish extends TFM_Command
 {
     @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
@@ -39,25 +39,10 @@ public class Command_smite extends TFM_Command
             return true;
         }
 
-        else
-        {
-            smite(player);
-            BarAPI.setMessage(sender_p, ChatColor.RED + "" + ChatColor.BOLD + "You forgot the smite reason, don't forget next time!", 120);
-            TFM_Util.playerMsg(sender, "I made smite reasons for a reason, use them please!", ChatColor.RED);
-            if (sender instanceof Player)
-            {
-                ((Player) sender).setHealth(0d);
-            }
-        }
-
-        return true;
-    }
-
     public static void smite(final Player player, final String reason)
     {
-        TFM_Util.bcastMsg(String.format("%s has been a naughty, naughty person.\nThey have thus been smitten!\n" + ChatColor.GOLD + "Reason: %s", player.getName(), reason), ChatColor.RED);
-        String full = String.format(ChatColor.RED + "%s has been smitten for %s", player.getName(), reason);
-        BarAPI.setMessage((full.length() <= 64 ? full : String.format("%s has been smitten!", player.getName())), 10);
+        TFM_Util.bcastMsg(String.format("%s has been punished for being a bad player" + ChatColor.YELLOW + "Reason for punishment: %s", player.getName(), reason), ChatColor.RED);
+        BarAPI.setMessage((full.length() <= 64 ? full : String.format("%s has been punished!", player.getName())), 10);
 
         //Deop
         player.setOp(false);
@@ -86,7 +71,7 @@ public class Command_smite extends TFM_Command
 
     public static void smite(final Player player)
     {
-        TFM_Util.bcastMsg(player.getName() + " has been a naughty, naughty boy.\nThey have thus been smitten!", ChatColor.RED);
+        TFM_Util.bcastMsg(player.getName() + " has been punished for being a bad player!", ChatColor.DARK_RED);
 
         //Deop
         player.setOp(false);
