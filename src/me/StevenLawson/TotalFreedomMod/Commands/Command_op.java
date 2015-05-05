@@ -50,7 +50,7 @@ public class Command_op extends TFM_Command
             }
         }
 
-        TFM_Util.adminAction(sender.getName(), "Opping " + player.getName(), false);
+        TFM_Util.adminAction(sender.getName(), "Toggling operator status for " + player.getName() "to: true", false);
         player.setOp(true);
 
         return true;
