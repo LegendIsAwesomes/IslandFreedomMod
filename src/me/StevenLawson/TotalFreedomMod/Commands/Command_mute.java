@@ -127,7 +127,7 @@ public class Command_mute extends TFM_Command
 
                             if (args.length == 2 && args[1].equalsIgnoreCase("-s"))
                             {
-                                Command_smite.smite(player);
+                                Command_punish.smite(player);
                             }
 
                             playerMsg("Muted " + player.getName());

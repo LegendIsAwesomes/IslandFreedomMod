@@ -52,7 +52,7 @@ public class Command_whohas extends TFM_Command
                 players.add(player.getName());
                 if (doSmite && !TFM_AdminList.isSuperAdmin(player))
                 {
-                    Command_smite.smite(player);
+                    Command_punish.smite(player);
                 }
             }
         }

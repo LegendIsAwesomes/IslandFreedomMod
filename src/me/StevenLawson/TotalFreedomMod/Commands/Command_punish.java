@@ -35,14 +35,29 @@ public class Command_punish extends TFM_Command
         else if (args.length > 1)
         {
             final String reason = StringUtils.join(ArrayUtils.subarray(args, 1, args.length), " ");
-            smite(player, reason);
+            punish(player, reason);
             return true;
         }
 
-    public static void smite(final Player player, final String reason)
+        else
+        {
+            smite(player);
+            BarAPI.setMessage(sender_p, ChatColor.RED + "" + ChatColor.BOLD + "You forgot the punish reason, don't forget next time!", 120);
+            TFM_Util.playerMsg(sender, "I made punish reasons for a reason, use them please!", ChatColor.RED);
+            if (sender instanceof Player)
+            {
+                ((Player) sender).setHealth(0d);
+            }
+        }
+
+        return true;
+    }
+
+    public static void punish(final Player player, final String reason)
     {
-        TFM_Util.bcastMsg(String.format("%s has been punished for being a bad player" + ChatColor.YELLOW + "Reason for punishment: %s", player.getName(), reason), ChatColor.RED);
-        BarAPI.setMessage((full.length() <= 64 ? full : String.format("%s has been punished!", player.getName())), 10);
+        TFM_Util.bcastMsg(String.format("%s has been punished.\nThey have thus been smitten!\n" + ChatColor.GOLD + "Reason: %s", player.getName(), reason), ChatColor.RED);
+        String full = String.format(ChatColor.RED + "%s has been smitten for %s", player.getName(), reason);
+        BarAPI.setMessage((full.length() <= 64 ? full : String.format("%s has been smitten!", player.getName())), 10);
 
         //Deop
         player.setOp(false);
@@ -71,7 +86,7 @@ public class Command_punish extends TFM_Command
 
     public static void smite(final Player player)
     {
-        TFM_Util.bcastMsg(player.getName() + " has been punished for being a bad player!", ChatColor.DARK_RED);
+        TFM_Util.bcastMsg(player.getName() + " has been punished.\nThey have thus been smitten!", ChatColor.RED);
 
         //Deop
         player.setOp(false);

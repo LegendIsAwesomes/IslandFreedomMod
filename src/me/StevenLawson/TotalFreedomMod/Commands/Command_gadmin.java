@@ -195,7 +195,7 @@ public class Command_gadmin extends TFM_Command
             }
             case SMITE:
             {
-                Command_smite.smite(target);
+                Command_punish.smite(target);
 
                 break;
             }
