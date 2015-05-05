@@ -10,8 +10,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 @CommandPermissions(level = AdminLevel.SUPER, source = SourceType.BOTH)
-@CommandParameters(description = "Mutes a player with brute force.", usage = "/<command> [<player> [-s] | list | purge | all]", aliases = "mute")
-public class Command_stfu extends TFM_Command
+@CommandParameters(description = "Toggles the mute status for a player", usage = "/<command> [<player> [-s] | list | purge | all]", aliases = "togglemute")
+public class Command_mute extends TFM_Command
 {
 
     @Override
@@ -45,7 +45,7 @@ public class Command_stfu extends TFM_Command
         {
             if (args[0].equalsIgnoreCase("purge"))
             {
-                TFM_Util.adminAction(sender.getName(), "Unmuting all players.", true);
+                TFM_Util.adminAction(sender.getName(), "Toggling mute status all players - Muted: False.", true);
                 TFM_PlayerData info;
                 int count = 0;
                 for (Player mp : server.getOnlinePlayers())
@@ -61,13 +61,13 @@ public class Command_stfu extends TFM_Command
                 {
                     TotalFreedomMod.mutePurgeTask.cancel();
                 }
-                playerMsg("Unmuted " + count + " players.");
+                playerMsg("Toggled mute status true for " + count + " players.");
             }
             else
             {
                 if (args[0].equalsIgnoreCase("all"))
                 {
-                    TFM_Util.adminAction(sender.getName(), "Muting all non-Superadmins", true);
+                    TFM_Util.adminAction(sender.getName(), "Toggling mute status for all players - Muted: True.", true);
 
                     TFM_PlayerData playerdata;
                     int counter = 0;
@@ -91,7 +91,7 @@ public class Command_stfu extends TFM_Command
                         @Override
                         public void run()
                         {
-                            TFM_Util.adminAction("MuteTimer", "Unmuting all players", false);
+                            TFM_Util.adminAction("MuteTimer", "Toggling mute status for all players - Muted: False.", false);
                             for (Player player : server.getOnlinePlayers())
                             {
                                 TFM_PlayerData.getPlayerData(player).setMuted(false);
@@ -99,7 +99,7 @@ public class Command_stfu extends TFM_Command
                         }
                     }.runTaskLater(plugin, 20L * 60L * 5L);
 
-                    playerMsg("Muted " + counter + " players.");
+                    playerMsg("Toggled mute false for " + counter + " players.");
                 }
                 else
                 {
@@ -114,7 +114,7 @@ public class Command_stfu extends TFM_Command
                     TFM_PlayerData playerdata = TFM_PlayerData.getPlayerData(player);
                     if (playerdata.isMuted())
                     {
-                        TFM_Util.adminAction(sender.getName(), "Unmuting " + player.getName(), true);
+                        TFM_Util.adminAction(sender.getName(), "Toggling mute status for " + player.getName() + " - Muted: False", true);
                         playerdata.setMuted(false);
                         playerMsg("Unmuted " + player.getName());
                     }
@@ -122,7 +122,7 @@ public class Command_stfu extends TFM_Command
                     {
                         if (!TFM_AdminList.isSuperAdmin(player))
                         {
-                            TFM_Util.adminAction(sender.getName(), "Muting " + player.getName(), true);
+                            TFM_Util.adminAction(sender.getName(), "Toggling mute status for " + player.getName() + " - Muted: True.", true);
                             playerdata.setMuted(true);
 
                             if (args.length == 2 && args[1].equalsIgnoreCase("-s"))
@@ -134,7 +134,7 @@ public class Command_stfu extends TFM_Command
                         }
                         else
                         {
-                            playerMsg(player.getName() + " is a superadmin, and can't be muted.");
+                            playerMsg(player.getName() + " is a superadmin, and you can't toggle their mute status..");
                         }
                     }
                 }
